@@ -1,7 +1,7 @@
 <template>
-    <div v-if="!todo.deleted " class="flex">
+    <div class="container">
         <div>{{ todo.title }}</div>
-        <button @click="deleteToDo">Delete</button>
+        <button v-if="!todo.deleted" @click="deleteToDo">Delete</button>
     </div>
 </template>
 <script>
@@ -16,9 +16,19 @@ export default {
     },
 };
 </script>
-<style>
-.flex {
+<style scoped>
+.container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    max-width: 200px;
+}
+button {
+    background-color: #ffe6c7;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
 }
 </style>

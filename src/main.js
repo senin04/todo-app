@@ -1,7 +1,24 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
-// import router from './router'
+import  { createRouter, createWebHistory} from 'vue-router'
+import DeletedToDos from "./views/DeletedToDos.vue"
+import ToDos from "./views/ToDos.vue"
 
-createApp(App).mount('#app')
+
+const routes = [
+    {path: '/', component: ToDos, props: {
+        todoEntries: []
+    }},
+    {path: '/Deleted', component: DeletedToDos, props: {
+        todoEntries: []
+    }}
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+createApp(App).use(router).mount('#app')
 

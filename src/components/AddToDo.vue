@@ -1,6 +1,6 @@
 <template>
     <form @submit="addToDo">
-        <input type="text" v-model="userInput" />
+        <input placeholder="New to-do" type="text" v-model="userInput" />
         <button>Add to list</button>
     </form>
 </template>
@@ -31,8 +31,26 @@ export default {
 form {
     margin-left: 40px;
 }
+
+input {
+    background-color: #ffe6c7;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 button {
-    margin-left: 2px;
+    background-color: #ffe6c7;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-left: 10px;
+}
+button:hover {
+    background-color: #ff6000;
 }
 </style>
 ;

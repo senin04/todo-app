@@ -1,20 +1,22 @@
 <template>
     <div id="app">
-        <ToDos
-            v-bind:todoEntries="todoEntries"
-            @delete-todo="handleDeleteToDo"
+        <RouterLink class="link" to="/">ToDos</RouterLink>
+        <RouterLink  class="link" to="/Deleted">Deleted ToDos</RouterLink>
+
+        <RouterView
+            v-bind="{ todoEntries: todoEntries }"
+            v-on:add-to-do="addToDo"
         />
-        <AddToDo @addToDo="addToDo" v-bind:todoEntries="todoEntries" />
     </div>
 </template>
 
 <script>
-import ToDos from "./components/ToDos.vue";
-import AddToDo from "./components/AddToDo.vue";
+import ToDos from "./views/ToDos.vue";
+import { RouterLink } from "vue-router";
 
 export default {
     name: "App",
-    components: { ToDos, AddToDo },
+    components: { ToDos },
     methods: {
         addToDo(newToDo) {
             if (newToDo.title) {
@@ -34,6 +36,7 @@ export default {
                 { id: 1, title: "First todo", deleted: false },
                 { id: 2, title: "Second todo", deleted: false },
                 { id: 3, title: "Third todo", deleted: false },
+                { id: 4, title: "Fourth todo", deleted: true },
             ],
         };
     },
@@ -43,9 +46,20 @@ export default {
 <style>
 #app {
     margin: 0 auto;
-    display: flex;
-    height: 100vh;
+    width: 500px;
     margin-top: 100px;
-    align-items: baseline;
+}
+.link {
+    margin-bottom: 80px;
+    margin-right: 40px;
+    text-decoration: none;
+    background-color: #FFA559;
+    padding: 10px 12px;
+    color: black;
+    border-radius: 5px;
+}
+
+.router-link-active {
+    background-color: #FF6000;
 }
 </style>

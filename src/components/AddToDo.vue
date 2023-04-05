@@ -1,5 +1,5 @@
 <template>
-    <form @submit="addToDo">
+    <form @submit.prevent="addToDo">
         <input placeholder="New to-do" type="text" v-model="userInput" />
         <button>Add to list</button>
     </form>
@@ -14,8 +14,7 @@ export default {
         };
     },
     methods: {
-        addToDo(event) {
-            event.preventDefault();
+        addToDo() {
             let newToDo = {
                 id: this.todoEntries.length + 1,
                 title: this.userInput,

@@ -2,11 +2,11 @@
     <div id="container-list">
         <h1>Basic To-Do-List</h1>
         <ul>
-            <li v-bind:key="item.id" v-for="item in activeToDos">
-                <ToDo v-bind:todo="item" @delete-todo="deleteTodo" />
+            <li :key="item.id" v-for="item in activeToDos">
+                <ToDo :todo="item" @delete-todo="deleteTodo" />
             </li>
         </ul>
-        <AddToDo @addToDo="addToDo" v-bind:todoEntries="todoEntries" />
+        <AddToDo @addToDo="addToDo" :todoEntries="todoEntries" />
     </div>
 </template>
 <script>

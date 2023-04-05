@@ -31,4 +31,7 @@ button {
     cursor: pointer;
     transition: 0.25s;
 }
+button:hover {
+    background-color: #ff6000;
+}
 </style>

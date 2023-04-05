@@ -2,8 +2,8 @@
     <div id="container-list">
         <h1>Deleted ToDos</h1>
         <ul>
-            <li v-bind:key="item.id" v-for="item in deletedToDos">
-                <ToDo v-bind:todo="item" />
+            <li :key="item.id" v-for="item in deletedToDos">
+                <ToDo :todo="item" />
             </li>
         </ul>
     </div>

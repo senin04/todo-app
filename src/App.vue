@@ -1,11 +1,11 @@
 <template>
     <div id="app">
         <RouterLink class="link" to="/">ToDos</RouterLink>
-        <RouterLink  class="link" to="/Deleted">Deleted ToDos</RouterLink>
+        <RouterLink class="link" to="/Deleted">Deleted ToDos</RouterLink>
 
         <RouterView
             v-bind="{ todoEntries: todoEntries }"
-            v-on:add-to-do="addToDo"
+            @add-to-do="addToDo"
         />
     </div>
 </template>
@@ -53,13 +53,13 @@ export default {
     margin-bottom: 80px;
     margin-right: 40px;
     text-decoration: none;
-    background-color: #FFA559;
+    background-color: #ffa559;
     padding: 10px 12px;
     color: black;
     border-radius: 5px;
 }
 
 .router-link-active {
-    background-color: #FF6000;
+    background-color: #ff6000;
 }
 </style>

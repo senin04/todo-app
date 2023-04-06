@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div>{{ todo.title }}</div>
-        <button v-if="!todo.deleted" @click="deleteToDo">Delete</button>
+        <button v-if="!todo.completed" @click="deleteToDo">Delete</button>
     </div>
 </template>
 <script>
@@ -10,7 +10,7 @@ export default {
     props: ["todo"],
     methods: {
         deleteToDo() {
-            this.todo.deleted = true;
+            this.todo.completed = true;
             this.$emit("delete-todo", this.todo.id);
         },
     },

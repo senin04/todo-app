@@ -18,7 +18,8 @@ export default {
             let newToDo = {
                 id: this.todoEntries.length + 1,
                 title: this.userInput,
-                deleted: false,
+                completed: false,
+                userId: 1,
             };
             this.$emit("addToDo", newToDo);
             this.userInput = "";

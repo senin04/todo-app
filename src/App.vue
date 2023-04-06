@@ -1,44 +1,83 @@
 <template>
     <div id="app">
-        <RouterLink class="link" to="/">ToDos</RouterLink>
-        <RouterLink class="link" to="/Deleted">Deleted ToDos</RouterLink>
+        <LoadingScreen v-if="loading === true" />
+        <div v-else>
+            <RouterLink class="link" to="/">ToDos</RouterLink>
+            <RouterLink class="link" to="/Deleted">Deleted ToDos</RouterLink>
 
-        <RouterView
-            v-bind="{ todoEntries: todoEntries }"
-            @add-to-do="addToDo"
-        />
+            <RouterView
+                v-bind="{ todoEntries: todoEntries }"
+                @add-to-do="addToDo"
+                @deleteTodo="handleDeleteToDo"
+            />
+        </div>
     </div>
 </template>
 
 <script>
 import ToDos from "./views/ToDos.vue";
 import { RouterLink } from "vue-router";
+import axios from "axios";
+import LoadingScreen from "./views/LoadingScreen.vue";
 
 export default {
     name: "App",
-    components: { ToDos },
+    components: { ToDos, LoadingScreen },
+    data() {
+        return {
+            loading: true,
+            erorred: false,
+            todoEntries: [],
+        };
+    },
     methods: {
         addToDo(newToDo) {
             if (newToDo.title) {
                 this.todoEntries.push(newToDo);
+                this.postData(newToDo);
             }
         },
         handleDeleteToDo(id) {
-            let index = this.todoEntries.findIndex((todo) => todo.id === id);
-            if (index !== -1) {
-                this.todoEntries[index].deleted = true;
-            }
+            axios
+                .delete(`https://jsonplaceholder.typicode.com/todos/ + ${id}`)
+                .then((response) => console.log("Status " + response.status + " Post removed"))
+                .then(() => {
+                    let index = this.todoEntries.findIndex(
+                        (todo) => todo.id === id
+                    );
+                    if (index !== -1) {
+                        this.todoEntries[index].completed = true;
+                    }
+                });
+        },
+        getData() {
+            axios
+                .get("https://jsonplaceholder.typicode.com/todos?_limit=4")
+                .then((response) => {
+                    this.todoEntries = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.errored = true;
+                })
+                .finally(() => (this.loading = false));
+        },
+        postData(todo) {
+            axios
+                .post("https://jsonplaceholder.typicode.com/todos?_limit=4", {
+                    title: todo.title,
+                    id: todo.id,
+                    completed: todo.completed,
+                    userId: todo.userId,
+                })
+                .then((response) => {
+                    console.log("Status " + response.status + " Post created");
+                })
+                .catch((err) => console.error(err));
         },
     },
-    data() {
-        return {
-            todoEntries: [
-                { id: 1, title: "First todo", deleted: false },
-                { id: 2, title: "Second todo", deleted: false },
-                { id: 3, title: "Third todo", deleted: false },
-                { id: 4, title: "Fourth todo", deleted: true },
-            ],
-        };
+    mounted() {
+        this.getData();
     },
 };
 </script>

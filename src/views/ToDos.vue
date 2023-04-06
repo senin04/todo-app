@@ -19,7 +19,7 @@ export default {
     props: ["todoEntries"],
     computed: {
         activeToDos() {
-            return this.todoEntries.filter((todo) => todo.deleted === false);
+            return this.todoEntries.filter((todo) => todo.completed === false);
         },
     },
     methods: {
@@ -28,7 +28,7 @@ export default {
         },
         addToDo(newToDo) {
             this.$emit("addToDo", newToDo);
-            console.log(newToDo);
+            // console.log(newToDo);
         },
     },
 };

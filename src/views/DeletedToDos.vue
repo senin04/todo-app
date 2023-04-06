@@ -17,7 +17,7 @@ export default {
     components: { ToDo },
     computed: {
         deletedToDos() {
-            return this.todoEntries.filter((todo) => todo.deleted === true);
+            return this.todoEntries.filter((todo) => todo.completed === true);
         },
     },
 };

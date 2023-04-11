@@ -7,7 +7,6 @@
 <script>
 export default {
     name: "AddToDo",
-    props: ["todoEntries"],
     data() {
         return {
             userInput: "",
@@ -21,8 +20,13 @@ export default {
                 completed: false,
                 userId: 1,
             };
-            this.$emit("addToDo", newToDo);
+            this.$store.dispatch("addToDo", newToDo);
             this.userInput = "";
+        },
+    },
+    computed: {
+        todoEntries() {
+            return this.$store.state.todoEntries;
         },
     },
 };

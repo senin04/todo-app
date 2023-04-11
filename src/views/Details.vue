@@ -1,22 +1,22 @@
 <template>
     <div id="container-list">
-        <h1>Deleted ToDos</h1>
+        <h1>To-Do-List</h1>
         <ul>
-            <li :key="item.id" v-for="item in deletedToDos">
-                <ToDo :todo="item" />
+            <li>
+                {{ }}
             </li>
         </ul>
+        <!-- <AddToDo /> -->
     </div>
 </template>
 
 <script>
-import ToDo from "../components/ToDo.vue";
 export default {
-    name: "DeletedToDos",
-    components: { ToDo },
+    name: "Details",
     computed: {
-        deletedToDos() {
-            return this.$store.getters.deletedToDos;
+        todo() {
+            const { id } = this.$route.params.id;
+            return this.$store.getters.getToDoById(id);
         },
     },
 };

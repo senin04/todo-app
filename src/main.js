@@ -5,7 +5,7 @@ import  { createRouter, createWebHistory} from 'vue-router'
 import DeletedToDos from "./views/DeletedToDos.vue"
 import ToDos from "./views/ToDos.vue"
 import PageNotFound from "./views/PageNotFound.vue"
-
+import store from './store'
 
 const routes = [
     {path: '/', component: ToDos, props: {
@@ -22,5 +22,8 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App);
+app.use(router);
+app.use(store);
+app.mount('#app');
 

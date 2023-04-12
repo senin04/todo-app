@@ -15,6 +15,7 @@ const store = createStore({
             state.todoEntries.push(todo);
         },
         DELETE_TO_DO(state, id) {
+            console.log(id)
             let index = state.todoEntries.findIndex((todo) => todo.id === id);
             if (index !== -1) {
                 state.todoEntries[index].completed = true;
@@ -27,6 +28,14 @@ const store = createStore({
             let index = state.todoEntries.findIndex((todo) => todo.id === id);
             if (index !== -1) {
                 state.todoEntries[index].completed = false;
+            }
+        },
+        CHANGE_NAME_TO_DO(state, newTodo) {
+            let index = state.todoEntries.findIndex(
+                (todo) => todo.id === newTodo.id
+            );
+            if (index !== -1) {
+                state.todoEntries[index].title = newTodo.title;
             }
         },
     },
@@ -73,6 +82,14 @@ const store = createStore({
                 .then(() => commit("RESTORE_TO_DO", todo.id))
                 .catch((err) => console.error(err));
         },
+        changeNameToDo({ commit }, todo) {
+            axios
+                .put(`https://jsonplaceholder.typicode.com/todos/1`, {
+                    title: todo.title,
+                })
+                .then(() => commit("CHANGE_NAME_TO_DO", todo))
+                .catch((err) => console.error(err));
+        },
     },
     getters: {
         activeToDos(state) {
@@ -83,7 +100,10 @@ const store = createStore({
         },
         getToDoById: (state) => (id) => {
             return state.todoEntries.find((todo) => todo.id === id);
-        }
+        },
+        numberOfActiveToDos(state) {
+            return state.todoEntries.filter((todo) => !todo.completed).length;
+        },
     },
 });
 

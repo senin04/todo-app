@@ -1,6 +1,10 @@
 <template>
     <div id="container-list">
-        <h1>To-Do-List</h1>
+        <div class="header">
+            <h1>To-Do-List</h1>
+            <div>Active ToDos: {{numberOfActiveToDos}}</div>
+        </div>
+        
         <ul>
             <li :key="item.id" v-for="item in activeToDos">
                 <ToDo :todo="item" />
@@ -20,11 +24,22 @@ export default {
         activeToDos() {
             return this.$store.getters.activeToDos;
         },
+        numberOfActiveToDos() {
+            return this.$store.getters.numberOfActiveToDos;
+        }
     },
 };
 </script>
 
 <style scoped>
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header div {
+font-size: 20px;
+}
 #container-list {
     background-color: #ffa559;
     padding: 20px;

@@ -1,10 +1,13 @@
 <template>
     <div class="container">
-        <router-link :to="`/ToDos/${todo.id}` + todo.id">
-            {{ todo.title }}
-        </router-link>
-        <button v-if="!todo.completed" @click="deleteToDo">Delete</button>
-        <button v-if="todo.completed" @click="restoreToDo">Restore</button>
+        <div>{{ todo.title }}</div>
+        <div class="flex">
+            <router-link class="link" :to="`/ToDos/${todo.id}`">
+                <button v-if="!todo.completed">Change</button>
+            </router-link>
+            <button v-if="!todo.completed" @click="deleteToDo">Delete</button>
+            <button v-if="todo.completed" @click="restoreToDo">Restore</button>
+        </div>
     </div>
 </template>
 <script>
@@ -29,7 +32,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 200px;
+    max-width: 280px;
 }
 button {
     background-color: #ffe6c7;
@@ -41,6 +44,24 @@ button {
     margin-left: 10px;
 }
 button:hover {
+    background-color: #ff6000;
+}
+.link {
+    text-decoration: none;
+    color: black;
+    transition: 0.25s;
+    border-radius: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.link button {
+    margin-left: 0;
+}
+
+.link:hover {
     background-color: #ff6000;
 }
 </style>

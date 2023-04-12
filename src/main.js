@@ -11,7 +11,7 @@ import Details from "./views/Details.vue"
 const routes = [
     {path: '/', component: ToDos, 
     },
-    {path: '/ToDos/:id', component: Details},
+    {path: '/ToDos/:id', name: "todo", component: Details},
     {path: '/Deleted', component: DeletedToDos
     },
     { path: '/:catchAll(.*)', component: PageNotFound },

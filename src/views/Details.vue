@@ -1,22 +1,39 @@
 <template>
     <div id="container-list">
         <h1>To-Do-List</h1>
-        <ul>
-            <li>
-                {{ }}
-            </li>
-        </ul>
-        <!-- <AddToDo /> -->
+        <form @submit.prevent="changeNameToDo">
+            <input type="text" v-model="newTitle" :placeholder="todo.title" />
+            <button>Save</button>
+        </form>
     </div>
 </template>
 
 <script>
 export default {
     name: "Details",
+    data() {
+        return {
+            newTitle: "",
+        };
+    },
     computed: {
         todo() {
-            const { id } = this.$route.params.id;
-            return this.$store.getters.getToDoById(id);
+            return this.$store.getters.getToDoById(
+                Number(this.$route.params.id)
+            );
+        },
+    },
+
+    methods: {
+        changeNameToDo() {
+            if (this.newTitle !== "") {
+                const changedToDo = {
+                    id: this.todo.id,
+                    title: this.newTitle,
+                };
+                this.$store.dispatch("changeNameToDo", changedToDo);
+                this.$router.push({ path: "/" });
+            }
         },
     },
 };
@@ -30,9 +47,28 @@ export default {
     border-radius: 5px;
 }
 
-li {
-    margin-bottom: 10px;
-    font-size: 20px;
-    overflow: hidden;
+form {
+    margin-left: 40px;
+}
+
+input {
+    background-color: #ffe6c7;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #ffe6c7;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-left: 10px;
+}
+button:hover {
+    background-color: #ff6000;
 }
 </style>

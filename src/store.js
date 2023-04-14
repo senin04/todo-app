@@ -15,7 +15,7 @@ const store = createStore({
             state.todoEntries.push(todo);
         },
         DELETE_TO_DO(state, id) {
-            console.log(id)
+            console.log(id);
             let index = state.todoEntries.findIndex((todo) => todo.id === id);
             if (index !== -1) {
                 state.todoEntries[index].completed = true;
@@ -57,11 +57,20 @@ const store = createStore({
         addToDo({ commit }, todo) {
             axios
                 .post("https://jsonplaceholder.typicode.com/todos?_limit=4", {
-                    title: todo.title,
-                    id: todo.id,
-                    completed: todo.completed,
                     userId: todo.userId,
+                    id: todo.id,
+                    title: todo.title,
+                    completed: todo.completed,
                 })
+                // .post(
+                //     `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+                //     JSON.stringify({
+                //         userId: todo.userId,
+                //         id: todo.id,
+                //         title: todo.title,
+                //         completed: todo.completed,
+                //     })
+                // )
                 .then((response) => {
                     commit("ADD_TO_DO", response.data);
                 })
@@ -103,6 +112,12 @@ const store = createStore({
         },
         numberOfActiveToDos(state) {
             return state.todoEntries.filter((todo) => !todo.completed).length;
+        },
+        getToDos(state) {
+            return state.todoEntries;
+        },
+        getLoadingState(state) {
+            return state.loading;
         },
     },
 });

@@ -14,6 +14,6 @@ h1 {
     justify-content: space-around;
     margin: 0 auto;
     margin-top: 300px;
-    color:white
+    color: white;
 }
 </style>

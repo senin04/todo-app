@@ -2,9 +2,8 @@
     <div id="container-list">
         <div class="header">
             <h1>To-Do-List</h1>
-            <div>Active ToDos: {{numberOfActiveToDos}}</div>
+            <div>Active ToDos: {{ numberOfActiveToDos }}</div>
         </div>
-        
         <ul>
             <li :key="item.id" v-for="item in activeToDos">
                 <ToDo :todo="item" />
@@ -16,17 +15,13 @@
 <script>
 import ToDo from "../components/ToDo.vue";
 import AddToDo from "../components/AddToDo.vue";
+import { mapGetters } from "vuex";
 
 export default {
     name: "ToDos",
     components: { ToDo, AddToDo },
     computed: {
-        activeToDos() {
-            return this.$store.getters.activeToDos;
-        },
-        numberOfActiveToDos() {
-            return this.$store.getters.numberOfActiveToDos;
-        }
+        ...mapGetters(["activeToDos", "numberOfActiveToDos"]),
     },
 };
 </script>
@@ -38,7 +33,7 @@ export default {
     justify-content: space-between;
 }
 .header div {
-font-size: 20px;
+    font-size: 20px;
 }
 #container-list {
     background-color: #ffa559;

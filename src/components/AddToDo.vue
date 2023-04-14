@@ -5,6 +5,7 @@
     </form>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
     name: "AddToDo",
     data() {
@@ -15,19 +16,19 @@ export default {
     methods: {
         addToDo() {
             let newToDo = {
-                id: this.todoEntries.length + 1,
+                id: this.getToDos.length + 1,
                 title: this.userInput,
                 completed: false,
                 userId: 1,
             };
+            ////////////////////////////
+            console.log(this.getToDos.length);
             this.$store.dispatch("addToDo", newToDo);
             this.userInput = "";
         },
     },
     computed: {
-        todoEntries() {
-            return this.$store.state.todoEntries;
-        },
+        ...mapGetters(["getToDos"]),
     },
 };
 </script>

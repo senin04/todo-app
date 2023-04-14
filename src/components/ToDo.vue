@@ -12,12 +12,13 @@
 </template>
 <script>
 import { RouterLink } from "vue-router";
-
 export default {
     name: "ToDo",
     props: ["todo"],
     methods: {
         deleteToDo() {
+            //////////////////////////////
+            console.log(this.todo.id);
             this.$store.dispatch("deleteToDo", this.todo.id);
         },
         restoreToDo() {

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <LoadingScreen v-if="loading === true" />
+        <LoadingScreen v-if="getLoadingState === true" />
         <div v-else>
             <RouterLink class="link" to="/">ToDos</RouterLink>
             <RouterLink class="link" to="/Deleted">Deleted ToDos</RouterLink>
@@ -12,24 +12,21 @@
 <script>
 import { RouterLink } from "vue-router";
 import LoadingScreen from "./views/LoadingScreen.vue";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     name: "App",
-    components: {  LoadingScreen },
+    components: { LoadingScreen },
     computed: {
-        loading() {
-            return this.$store.state.loading;
-        },
+        ...mapGetters(["getLoadingState"]),
     },
     methods: {
-        getData() {
-            this.$store.dispatch("getData");
-        },
+        ...mapActions(["getData"]),
     },
     mounted() {
         this.getData();
     },
-    
 };
 </script>
 

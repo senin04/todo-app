@@ -17,8 +17,6 @@ export default {
     props: ["todo"],
     methods: {
         deleteToDo() {
-            //////////////////////////////
-            console.log(this.todo.id);
             this.$store.dispatch("deleteToDo", this.todo.id);
         },
         restoreToDo() {

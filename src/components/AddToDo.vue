@@ -21,8 +21,6 @@ export default {
                 completed: false,
                 userId: 1,
             };
-            ////////////////////////////
-            console.log(this.getToDos.length);
             this.$store.dispatch("addToDo", newToDo);
             this.userInput = "";
         },

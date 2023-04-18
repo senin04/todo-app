@@ -62,17 +62,8 @@ const store = createStore({
                     title: todo.title,
                     completed: todo.completed,
                 })
-                // .post(
-                //     `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-                //     JSON.stringify({
-                //         userId: todo.userId,
-                //         id: todo.id,
-                //         title: todo.title,
-                //         completed: todo.completed,
-                //     })
-                // )
-                .then((response) => {
-                    commit("ADD_TO_DO", response.data);
+                .then(() => {
+                    commit("ADD_TO_DO", todo);
                 })
                 .catch((err) => console.error(err));
         },
